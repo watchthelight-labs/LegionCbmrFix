@@ -11,8 +11,12 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y clang lld
-      - run: ./build.sh
+      # LLVM 20, the same version the tested binary was built with, so the release hash matches a local build
+      - run: |
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+          echo "deb http://apt.llvm.org/noble/ llvm-toolchain-noble-20 main" | sudo tee /etc/apt/sources.list.d/llvm20.list
+          sudo apt-get update && sudo apt-get install -y clang-20 lld-20
+      - run: CC=clang-20 LLD_LINK=lld-link-20 ./build.sh
       - uses: actions/upload-artifact@v4
         with:
           name: LegionCbmrFix

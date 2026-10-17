@@ -70,7 +70,7 @@ Disabling cloud recovery in the BIOS setup might also work, but I haven't found 
 ./build.sh
 ```
 
-Needs clang and lld-link from LLVM: `apt install clang lld` on Linux, `port install llvm-20` (MacPorts) or `brew install llvm` on macOS. Apple's clang lacks lld-link. The build is reproducible, so the SHA-256 printed at the end should match the release.
+Needs clang and lld-link from LLVM: `apt install clang lld` on Linux, `port install llvm-20` (MacPorts) or `brew install llvm` on macOS. Apple's clang lacks lld-link. The build is reproducible: with LLVM 20 (what the releases and my own builds use) the SHA-256 printed at the end matches the release. Other LLVM versions give a different but equivalent file.
 
 ## How it works
 
