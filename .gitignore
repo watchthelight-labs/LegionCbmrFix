@@ -1,0 +1,4 @@
+out/
+*.o
+*.lib
+.DS_Store

@@ -1,0 +1,25 @@
+name: build
+on:
+  push:
+  pull_request:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y clang lld
+      - run: ./build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LegionCbmrFix
+          path: out/LegionCbmrFix.efi
+      - if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd out && zip ../LegionCbmrFix-${GITHUB_REF_NAME}.zip LegionCbmrFix.efi && cd ..
+          gh release upload "$GITHUB_REF_NAME" LegionCbmrFix-${GITHUB_REF_NAME}.zip

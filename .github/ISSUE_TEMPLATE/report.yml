@@ -1,0 +1,36 @@
+name: Report
+description: A bug, or a report from another machine
+body:
+  - type: input
+    id: machine
+    attributes:
+      label: Laptop model and machine type
+      placeholder: Legion 5 15IAX10 (83F0)
+    validations:
+      required: true
+  - type: input
+    id: bios
+    attributes:
+      label: BIOS version
+      placeholder: S2CN26WW
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: macOS build and OpenCore version
+      placeholder: 26.7.1 (25G241), OpenCore 1.0.8
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Output of tools/cbmr-status.sh
+      render: text
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Paste the panic line if there was one.
+    validations:
+      required: true
