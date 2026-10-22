@@ -1,9 +1,5 @@
 # LegionCbmrFix
 
-> **Heads up:** a good portion of this code is AI generated. I do understand how it works,
-> and I'm happy to explain any of it. If something looks wrong or you have a question,
-> open an issue or ping me on Discord (`watchthelight`).
-
 A small OpenCore UEFI driver for Lenovo laptops whose BIOS loads Microsoft's `cbmr_driver.efi` (Cloud Bare Metal Recovery, the "reinstall Windows from the cloud" feature) on every boot. That image sits at 0x180000000, and macOS later trips over its pages and panics. The driver unloads the image before macOS starts and reserves its 164 KiB so macOS never uses them.
 
 Found on a Legion 5 15IAX10 (83F0, BIOS S2CN26WW). Other Lenovo models with cloud recovery in the firmware may have the same problem; if yours does, please open an issue so I can add it to the list.
